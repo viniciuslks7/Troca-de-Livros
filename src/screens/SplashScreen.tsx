@@ -180,7 +180,8 @@ const SplashScreen: React.FC = () => {
       {/* Logo */}
       <LogoContainer>
         <LogoImage 
-          source={require('../../assets/Telas/1 - SPLASH/LOGO TROCA & TROCA 1.png')}
+          source={require('../../assets/logo.png')}
+          resizeMode="contain"
         />
       </LogoContainer>
     </Container>
