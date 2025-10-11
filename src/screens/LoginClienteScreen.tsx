@@ -104,8 +104,12 @@ const BackButton = styled.TouchableOpacity`
 const BackIcon = styled.View`
   width: 12px;
   height: 12px;
-  border-left: 2px solid #1A2530;
-  border-bottom: 2px solid #1A2530;
+  border-left-width: 2px;
+  border-left-color: #1A2530;
+  border-left-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #1A2530;
+  border-bottom-style: solid;
   transform: rotate(45deg);
 `;
 
@@ -228,7 +232,9 @@ const EyeIconImage = styled(Image)`
 const ForgotPasswordText = styled.TouchableOpacity`
   position: absolute;
   right: 20px;
-  top: 202px;
+  top: 540px;
+  padding: 8px 15px;
+  z-index: 10;
 `;
 
 const ForgotPasswordLabel = styled.Text`
@@ -346,6 +352,8 @@ const LoginClienteScreen: React.FC = () => {
   const handleLogin = () => {
     // Implementar lógica de login
     console.log('Login com:', { email, password });
+    // Navegar para a tela principal após login bem-sucedido
+    navigation.navigate('Navigation');
   };
 
   const handleGoogleLogin = () => {
@@ -362,6 +370,7 @@ const LoginClienteScreen: React.FC = () => {
   };
 
   const handleForgotPassword = () => {
+    console.log('Navegando para EsqueceuSenha');
     navigation.navigate('EsqueceuSenha');
   };
 
@@ -421,7 +430,7 @@ const LoginClienteScreen: React.FC = () => {
                 <TextInput
                   value={email}
                   onChangeText={setEmail}
-                  placeholder="Digite seu e-mail"
+                  placeholder="um email"
                   keyboardType="email-address"
                   autoCapitalize="none"
                 />
@@ -435,7 +444,7 @@ const LoginClienteScreen: React.FC = () => {
                   <PasswordTextInput
                     value={password}
                     onChangeText={setPassword}
-                    placeholder="Digite sua senha"
+                    placeholder="uma senha"
                     secureTextEntry={false}
                   />
                 ) : (
@@ -452,10 +461,11 @@ const LoginClienteScreen: React.FC = () => {
                   } />
                 </EyeIcon>
               </PasswordContainer>
-              <ForgotPasswordText onPress={handleForgotPassword}>
-                <ForgotPasswordLabel>Recuperar senha</ForgotPasswordLabel>
-              </ForgotPasswordText>
             </InputGroup>
+
+            <ForgotPasswordText onPress={handleForgotPassword}>
+              <ForgotPasswordLabel>Recuperar senha</ForgotPasswordLabel>
+            </ForgotPasswordText>
           </FormContainer>
 
           {/* Buttons */}
