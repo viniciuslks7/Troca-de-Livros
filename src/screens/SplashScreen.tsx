@@ -1,7 +1,7 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { useNavigation } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
-import { StatusBar, Dimensions, Image } from 'react-native';
+import { StatusBar, Dimensions, Animated } from 'react-native';
 import styled from 'styled-components/native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { RootStackParamList } from '../navigation/AppNavigator';
@@ -117,7 +117,7 @@ const LogoContainer = styled.View`
   align-items: center;
 `;
 
-const LogoImage = styled.Image`
+const LogoImage = styled(Animated.Image)`
   width: 286px;
   height: 184px;
   resize-mode: contain;
@@ -125,14 +125,48 @@ const LogoImage = styled.Image`
 
 const SplashScreen: React.FC = () => {
   const navigation = useNavigation<SplashScreenNavigationProp>();
+  const pulseAnim = useRef(new Animated.Value(1)).current;
+  const fadeAnim = useRef(new Animated.Value(0)).current;
 
   useEffect(() => {
-    const timer = setTimeout(() => {
-      navigation.navigate('Propaganda');
-    }, 3000); // 3 segundos na splash
+    // Animação de fade in da tela inteira
+    Animated.timing(fadeAnim, {
+      toValue: 1,
+      duration: 500,
+      useNativeDriver: true,
+    }).start();
 
-    return () => clearTimeout(timer);
-  }, [navigation]);
+    // Animação pulsante da logo
+    const pulse = () => {
+      Animated.sequence([
+        Animated.timing(pulseAnim, {
+          toValue: 1.1,
+          duration: 800,
+          useNativeDriver: true,
+        }),
+        Animated.timing(pulseAnim, {
+          toValue: 1,
+          duration: 800,
+          useNativeDriver: true,
+        }),
+      ]).start(() => pulse());
+    };
+
+    // Inicia a pulsação após o fade in
+    const pulseTimeout = setTimeout(() => {
+      pulse();
+    }, 300);
+
+    // Navega para próxima tela após 3 segundos
+    const navigationTimeout = setTimeout(() => {
+      navigation.navigate('Propaganda');
+    }, 3000);
+
+    return () => {
+      clearTimeout(pulseTimeout);
+      clearTimeout(navigationTimeout);
+    };
+  }, [navigation, pulseAnim, fadeAnim]);
 
   const getCurrentTime = () => {
     const now = new Date();
@@ -144,47 +178,52 @@ const SplashScreen: React.FC = () => {
   };
 
   return (
-    <Container>
-      <GradientBackground
-        colors={['#FFFFFF', '#074477']}
-        locations={[0.35, 1]}
-        start={{ x: 0.5, y: 0 }}
-        end={{ x: 0.5, y: 1 }}
-      />
-      
-      <StatusBar barStyle="light-content" />
-      
-      {/* Status Bar */}
-      <StatusBarContainer>
-        <TimeContainer>
-          <TimeText>{getCurrentTime()}</TimeText>
-        </TimeContainer>
-        
-        <BatteryContainer>
-          <SignalBars>
-            <SignalBar height={4} />
-            <SignalBar height={6} />
-            <SignalBar height={8} />
-            <SignalBar height={11} />
-          </SignalBars>
-          
-          <WifiIcon />
-          
-          <BatteryIcon>
-            <BatteryLevel />
-            <BatteryTip />
-          </BatteryIcon>
-        </BatteryContainer>
-      </StatusBarContainer>
-
-      {/* Logo */}
-      <LogoContainer>
-        <LogoImage 
-          source={require('../../assets/logo.png')}
-          resizeMode="contain"
+    <Animated.View style={{ opacity: fadeAnim, flex: 1 }}>
+      <Container>
+        <GradientBackground
+          colors={['#FFFFFF', '#074477']}
+          locations={[0.35, 1]}
+          start={{ x: 0.5, y: 0 }}
+          end={{ x: 0.5, y: 1 }}
         />
-      </LogoContainer>
-    </Container>
+        
+        <StatusBar barStyle="light-content" />
+        
+        {/* Status Bar */}
+        <StatusBarContainer>
+          <TimeContainer>
+            <TimeText>{getCurrentTime()}</TimeText>
+          </TimeContainer>
+          
+          <BatteryContainer>
+            <SignalBars>
+              <SignalBar height={4} />
+              <SignalBar height={6} />
+              <SignalBar height={8} />
+              <SignalBar height={11} />
+            </SignalBars>
+            
+            <WifiIcon />
+            
+            <BatteryIcon>
+              <BatteryLevel />
+              <BatteryTip />
+            </BatteryIcon>
+          </BatteryContainer>
+        </StatusBarContainer>
+
+        {/* Logo com animação */}
+        <LogoContainer>
+          <LogoImage 
+            source={require('../../assets/logo.png')}
+            resizeMode="contain"
+            style={{
+              transform: [{ scale: pulseAnim }],
+            }}
+          />
+        </LogoContainer>
+      </Container>
+    </Animated.View>
   );
 };
 
