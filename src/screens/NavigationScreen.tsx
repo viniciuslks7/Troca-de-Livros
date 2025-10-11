@@ -122,7 +122,7 @@ const NavigationScreen: React.FC<NavigationScreenProps> = ({ navigation }) => {
         onFavoritesPress={() => console.log('Favorites pressed')}
         onCartPress={() => console.log('Cart pressed')}
         onNotificationsPress={() => console.log('Notifications pressed')}
-        onProfilePress={() => console.log('Profile pressed')}
+        onProfilePress={() => navigation.navigate('Profile')}
       />
     </Container>
   );

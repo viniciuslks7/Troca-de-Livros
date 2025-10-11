@@ -8,6 +8,7 @@ import LoginClienteScreen from '../screens/LoginClienteScreen';
 import CriarContaScreen from '../screens/CriarContaScreen';
 import EsqueceuSenhaScreen from '../screens/EsqueceuSenhaScreen';
 import NavigationScreen from '../screens/NavigationScreen';
+import ProfileScreen from '../screens/ProfileScreen';
 
 export type RootStackParamList = {
   Splash: undefined;
@@ -17,6 +18,7 @@ export type RootStackParamList = {
   CriarConta: undefined;
   EsqueceuSenha: undefined;
   Navigation: undefined;
+  Profile: undefined;
 };
 
 const Stack = createStackNavigator<RootStackParamList>();
@@ -38,6 +40,7 @@ const AppNavigator: React.FC = () => {
       <Stack.Screen name="CriarConta" component={CriarContaScreen} />
       <Stack.Screen name="EsqueceuSenha" component={EsqueceuSenhaScreen} />
       <Stack.Screen name="Navigation" component={NavigationScreen} />
+      <Stack.Screen name="Profile" component={ProfileScreen} />
     </Stack.Navigator>
   );
 };
