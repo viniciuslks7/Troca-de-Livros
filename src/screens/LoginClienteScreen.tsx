@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useNavigation } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
-import { StatusBar, Dimensions, Animated, ScrollView } from 'react-native';
+import { StatusBar, Dimensions, Animated, ScrollView, Image } from 'react-native';
 import styled from 'styled-components/native';
 import { RootStackParamList } from '../navigation/AppNavigator';
 
@@ -207,8 +207,13 @@ const PasswordDot = styled.View`
 const EyeIcon = styled.TouchableOpacity`
   width: 24px;
   height: 24px;
-  background-color: #1A2530;
-  border-radius: 2px;
+  justify-content: center;
+  align-items: center;
+`;
+
+const EyeIconImage = styled(Image)`
+  width: 20px;
+  height: 20px;
 `;
 
 const ForgotPasswordText = styled.Text`
@@ -260,11 +265,9 @@ const GoogleButton = styled.TouchableOpacity`
   gap: 8px;
 `;
 
-const GoogleIcon = styled.View`
+const GoogleIcon = styled(Image)`
   width: 24px;
   height: 24px;
-  background-color: #4285F4;
-  border-radius: 2px;
 `;
 
 const GoogleButtonText = styled.Text`
@@ -418,7 +421,9 @@ const LoginClienteScreen: React.FC = () => {
                     <PasswordDot key={index} />
                   ))}
                 </PasswordDots>
-                <EyeIcon onPress={() => setShowPassword(!showPassword)} />
+                <EyeIcon onPress={() => setShowPassword(!showPassword)}>
+                  <EyeIconImage source={require('../../../icon-senha.png')} />
+                </EyeIcon>
               </PasswordContainer>
               <ForgotPasswordText>Recuperar senha</ForgotPasswordText>
             </InputGroup>
@@ -431,7 +436,7 @@ const LoginClienteScreen: React.FC = () => {
             </LoginButton>
 
             <GoogleButton onPress={handleGoogleLogin}>
-              <GoogleIcon />
+              <GoogleIcon source={require('../../../botao-google.png')} />
               <GoogleButtonText>Entrar com o Google</GoogleButtonText>
             </GoogleButton>
           </ButtonsContainer>
