@@ -205,6 +205,14 @@ const PasswordDot = styled.View`
   border-radius: 3px;
 `;
 
+const PasswordTextInput = styled.TextInput`
+  flex: 1;
+  font-family: 'Poppins';
+  font-size: 16px;
+  color: #1A2530;
+  padding: 0;
+`;
+
 const EyeIcon = styled.TouchableOpacity`
   width: 24px;
   height: 24px;
@@ -310,7 +318,7 @@ const CreateAccountText = styled.Text`
 const LoginClienteScreen: React.FC = () => {
   const navigation = useNavigation<LoginClienteScreenNavigationProp>();
   const [email, setEmail] = useState('glaucon.k@gmail.com');
-  const [password, setPassword] = useState('');
+  const [password, setPassword] = useState('12345678');
   const [showPassword, setShowPassword] = useState(false);
   
   const fadeAnim = useRef(new Animated.Value(0)).current;
@@ -347,8 +355,7 @@ const LoginClienteScreen: React.FC = () => {
   };
 
   const handleCreateAccount = () => {
-    // Implementar navegação para criar conta
-    console.log('Criar conta');
+    navigation.navigate('CriarConta');
   };
 
   const getCurrentTime = () => {
@@ -417,13 +424,25 @@ const LoginClienteScreen: React.FC = () => {
             <InputGroup>
               <InputLabel>Senha</InputLabel>
               <PasswordContainer>
-                <PasswordDots>
-                  {[...Array(8)].map((_, index) => (
-                    <PasswordDot key={index} />
-                  ))}
-                </PasswordDots>
+                {showPassword ? (
+                  <PasswordTextInput
+                    value={password}
+                    onChangeText={setPassword}
+                    placeholder="Digite sua senha"
+                    secureTextEntry={false}
+                  />
+                ) : (
+                  <PasswordDots>
+                    {[...Array(8)].map((_, index) => (
+                      <PasswordDot key={index} />
+                    ))}
+                  </PasswordDots>
+                )}
                 <EyeIcon onPress={() => setShowPassword(!showPassword)}>
-                  <EyeIconImage source={require('../../assets/icon-senha.png')} />
+                  <EyeIconImage source={showPassword ? 
+                    require('../../assets/eye-aberto.jpg') : 
+                    require('../../assets/icon-senha.png')
+                  } />
                 </EyeIcon>
               </PasswordContainer>
               <ForgotPasswordText>Recuperar senha</ForgotPasswordText>
@@ -437,7 +456,7 @@ const LoginClienteScreen: React.FC = () => {
             </LoginButton>
 
             <GoogleButton onPress={handleGoogleLogin}>
-              <GoogleIcon source={require('../../assets/botao-google.png')} />
+              <GoogleIcon source={require('../../assets/icongoogle.png')} />
               <GoogleButtonText>Entrar com o Google</GoogleButtonText>
             </GoogleButton>
           </ButtonsContainer>
