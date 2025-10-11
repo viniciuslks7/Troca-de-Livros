@@ -133,7 +133,7 @@ const SplashScreen: React.FC = () => {
     Animated.timing(fadeAnim, {
       toValue: 1,
       duration: 500,
-      useNativeDriver: true,
+      useNativeDriver: false, // Para web compatibility
     }).start();
 
     // Animação pulsante da logo
@@ -142,12 +142,12 @@ const SplashScreen: React.FC = () => {
         Animated.timing(pulseAnim, {
           toValue: 1.1,
           duration: 800,
-          useNativeDriver: true,
+          useNativeDriver: false, // Para web compatibility
         }),
         Animated.timing(pulseAnim, {
           toValue: 1,
           duration: 800,
-          useNativeDriver: true,
+          useNativeDriver: false, // Para web compatibility
         }),
       ]).start(() => pulse());
     };
