@@ -6,6 +6,7 @@ import PropagandaScreen from '../screens/PropagandaScreen';
 import InicialScreen from '../screens/InicialScreen';
 import LoginClienteScreen from '../screens/LoginClienteScreen';
 import CriarContaScreen from '../screens/CriarContaScreen';
+import EsqueceuSenhaScreen from '../screens/EsqueceuSenhaScreen';
 
 export type RootStackParamList = {
   Splash: undefined;
@@ -13,6 +14,7 @@ export type RootStackParamList = {
   Inicial: undefined;
   LoginCliente: undefined;
   CriarConta: undefined;
+  EsqueceuSenha: undefined;
 };
 
 const Stack = createStackNavigator<RootStackParamList>();
@@ -32,6 +34,7 @@ const AppNavigator: React.FC = () => {
       <Stack.Screen name="Inicial" component={InicialScreen} />
       <Stack.Screen name="LoginCliente" component={LoginClienteScreen} />
       <Stack.Screen name="CriarConta" component={CriarContaScreen} />
+      <Stack.Screen name="EsqueceuSenha" component={EsqueceuSenhaScreen} />
     </Stack.Navigator>
   );
 };

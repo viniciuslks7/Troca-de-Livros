@@ -225,10 +225,13 @@ const EyeIconImage = styled(Image)`
   height: 20px;
 `;
 
-const ForgotPasswordText = styled.Text`
+const ForgotPasswordText = styled.TouchableOpacity`
   position: absolute;
   right: 20px;
   top: 202px;
+`;
+
+const ForgotPasswordLabel = styled.Text`
   font-family: 'Poppins';
   font-weight: 400;
   font-size: 13px;
@@ -358,6 +361,10 @@ const LoginClienteScreen: React.FC = () => {
     navigation.navigate('CriarConta');
   };
 
+  const handleForgotPassword = () => {
+    navigation.navigate('EsqueceuSenha');
+  };
+
   const getCurrentTime = () => {
     const now = new Date();
     return now.toLocaleTimeString('pt-BR', { 
@@ -445,7 +452,9 @@ const LoginClienteScreen: React.FC = () => {
                   } />
                 </EyeIcon>
               </PasswordContainer>
-              <ForgotPasswordText>Recuperar senha</ForgotPasswordText>
+              <ForgotPasswordText onPress={handleForgotPassword}>
+                <ForgotPasswordLabel>Recuperar senha</ForgotPasswordLabel>
+              </ForgotPasswordText>
             </InputGroup>
           </FormContainer>
 
