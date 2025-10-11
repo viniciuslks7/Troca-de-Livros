@@ -102,10 +102,11 @@ const BackButton = styled.TouchableOpacity`
 `;
 
 const BackIcon = styled.View`
-  width: 24px;
-  height: 24px;
-  background-color: #1A2530;
-  border-radius: 2px;
+  width: 12px;
+  height: 12px;
+  border-left: 2px solid #1A2530;
+  border-bottom: 2px solid #1A2530;
+  transform: rotate(45deg);
 `;
 
 // Header Content
@@ -422,7 +423,7 @@ const LoginClienteScreen: React.FC = () => {
                   ))}
                 </PasswordDots>
                 <EyeIcon onPress={() => setShowPassword(!showPassword)}>
-                  <EyeIconImage source={require('../../../icon-senha.png')} />
+                  <EyeIconImage source={require('../../assets/icon-senha.png')} />
                 </EyeIcon>
               </PasswordContainer>
               <ForgotPasswordText>Recuperar senha</ForgotPasswordText>
@@ -436,7 +437,7 @@ const LoginClienteScreen: React.FC = () => {
             </LoginButton>
 
             <GoogleButton onPress={handleGoogleLogin}>
-              <GoogleIcon source={require('../../../botao-google.png')} />
+              <GoogleIcon source={require('../../assets/botao-google.png')} />
               <GoogleButtonText>Entrar com o Google</GoogleButtonText>
             </GoogleButton>
           </ButtonsContainer>
