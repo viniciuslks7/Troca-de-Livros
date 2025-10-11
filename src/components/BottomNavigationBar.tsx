@@ -117,7 +117,7 @@ const BottomNavigationBar: React.FC<BottomNavigationBarProps> = ({
             }}
           >
             <Image 
-              source={require('../../assets/Telas/7-navegacao/icon-sacola-venda.png')} 
+              source={require('../../assets/Telas/7-navegacao/icon-sacola.png')} 
               style={{
                 width: 24,
                 height: 24,

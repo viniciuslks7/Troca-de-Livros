@@ -17,18 +17,21 @@ const CardContainer = styled.TouchableOpacity`
 
 const BookImage = styled.Image`
   width: 100%;
-  height: 160px;
+  height: 120px;
   border-radius: ${theme.borderRadius.md}px;
+  resize-mode: contain;
+`;
+
+const ImageContainer = styled.View`
   margin-bottom: ${theme.spacing.sm}px;
 `;
 
 const WeeklyBadge = styled.View`
-  position: absolute;
-  top: ${theme.spacing.md}px;
-  left: ${theme.spacing.md}px;
   background-color: rgba(20, 97, 162, 0.1);
   border-radius: ${theme.borderRadius.sm}px;
   padding: 4px 8px;
+  margin-bottom: 4px;
+  align-self: flex-start;
 `;
 
 const WeeklyBadgeText = styled.Text`
@@ -97,6 +100,7 @@ const HorizontalBookImage = styled.Image`
   height: 120px;
   border-radius: ${theme.borderRadius.md}px;
   margin-right: ${theme.spacing.md}px;
+  resize-mode: contain;
 `;
 
 const HorizontalBookInfo = styled.View`
@@ -128,7 +132,9 @@ const BookCard: React.FC<BookCardProps> = ({
   if (variant === 'horizontal') {
     return (
       <HorizontalCard onPress={onPress}>
-        <HorizontalBookImage source={book.image} />
+        <ImageContainer>
+          <HorizontalBookImage source={book.image} />
+        </ImageContainer>
         <HorizontalBookInfo>
           {book.showWeeklyBadge && (
             <WeeklyBadge>
@@ -147,12 +153,14 @@ const BookCard: React.FC<BookCardProps> = ({
 
   return (
     <CardContainer onPress={onPress}>
+      <ImageContainer>
+        <BookImage source={book.image} />
+      </ImageContainer>
       {book.showWeeklyBadge && (
         <WeeklyBadge>
           <WeeklyBadgeText>MAIS LIDOS DA SEMANA</WeeklyBadgeText>
         </WeeklyBadge>
       )}
-      <BookImage source={book.image} />
       <BookTitle large={book.isLarge}>{book.title}</BookTitle>
       <BookPrice large={book.isLarge}>{book.price}</BookPrice>
       <AddButton onPress={onAddPress}>

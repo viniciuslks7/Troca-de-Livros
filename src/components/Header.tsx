@@ -93,7 +93,7 @@ const Header: React.FC<HeaderProps> = ({ onMenuPress, onShoppingBagPress }) => {
       </LeftSection>
       
       <ShoppingBagContainer onPress={onShoppingBagPress}>
-        <ShoppingBagIcon source={require('../../assets/Telas/7-navegacao/icon-sacola-venda.png')} />
+        <ShoppingBagIcon source={require('../../assets/Telas/7-navegacao/icon-sacola.png')} />
         <NotificationBadge />
       </ShoppingBagContainer>
     </HeaderContainer>
