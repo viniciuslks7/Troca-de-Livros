@@ -18,6 +18,7 @@ type CardOptionListProps = {
 
 const Container = styled.View`
   margin: ${theme.spacing.lg}px;
+  margin-top: 0px;
 `;
 
 const CardContainer = styled.TouchableOpacity<{ selected: boolean }>`
@@ -28,7 +29,7 @@ const CardContainer = styled.TouchableOpacity<{ selected: boolean }>`
     selected ? theme.colors.primaryBlue : theme.colors.white};
   border-radius: 20px;
   padding: ${theme.spacing.md}px;
-  margin-bottom: ${theme.spacing.md}px;
+  margin-bottom: ${theme.spacing.sm }px;
   elevation: 3;
 `;
 
@@ -122,7 +123,7 @@ const CardOptionList: React.FC<CardOptionListProps> = ({
 
   return (
     <Container>
-      <TextTitle>Cart‰es Cadastrados</TextTitle>
+      <TextTitle>Cart√µes Cadastrados</TextTitle>
       {cards.map((card) => (
         <CardContainer
           key={card.id}
