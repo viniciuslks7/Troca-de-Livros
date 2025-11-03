@@ -1,14 +1,15 @@
-import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
+import React from 'react';
 
-import SplashScreen from '../screens/SplashScreen';
-import PropagandaScreen from '../screens/PropagandaScreen';
-import InicialScreen from '../screens/InicialScreen';
-import LoginClienteScreen from '../screens/LoginClienteScreen';
 import CriarContaScreen from '../screens/CriarContaScreen';
 import EsqueceuSenhaScreen from '../screens/EsqueceuSenhaScreen';
+import HistoricooComprasScreen from '../screens/HistoricoComprasScreen';
+import InicialScreen from '../screens/InicialScreen';
+import LoginClienteScreen from '../screens/LoginClienteScreen';
 import NavigationScreen from '../screens/NavigationScreen';
 import ProfileScreen from '../screens/ProfileScreen';
+import PropagandaScreen from '../screens/PropagandaScreen';
+import SplashScreen from '../screens/SplashScreen';
 
 export type RootStackParamList = {
   Splash: undefined;
@@ -19,6 +20,7 @@ export type RootStackParamList = {
   EsqueceuSenha: undefined;
   Navigation: undefined;
   Profile: undefined;
+  HistoricoCompras: undefined;
 };
 
 const Stack = createStackNavigator<RootStackParamList>();
@@ -41,6 +43,8 @@ const AppNavigator: React.FC = () => {
       <Stack.Screen name="EsqueceuSenha" component={EsqueceuSenhaScreen} />
       <Stack.Screen name="Navigation" component={NavigationScreen} />
       <Stack.Screen name="Profile" component={ProfileScreen} />
+       <Stack.Screen name="HistoricoCompras" component={HistoricooComprasScreen} />
+
     </Stack.Navigator>
   );
 };
