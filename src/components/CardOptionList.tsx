@@ -101,6 +101,13 @@ const AddButton = styled.TouchableOpacity`
   margin-top: ${theme.spacing.md}px;
 `;
 
+const TextTitle = styled.Text`
+  font-size: 18px;
+  font-weight: 600;
+  color: ${theme.colors.darkBlue};
+  margin-bottom: ${theme.spacing.md}px;
+`;
+
 const CardOptionList: React.FC<CardOptionListProps> = ({
   cards,
   onSelect,
@@ -115,6 +122,7 @@ const CardOptionList: React.FC<CardOptionListProps> = ({
 
   return (
     <Container>
+      <TextTitle>Cartäes Cadastrados</TextTitle>
       {cards.map((card) => (
         <CardContainer
           key={card.id}
