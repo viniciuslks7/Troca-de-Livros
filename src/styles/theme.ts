@@ -8,6 +8,7 @@ export const theme = {
     lightGray: '#d6d3d0',
     white: '#ffffff',
     inactiveText: '#454545',
+    darkRed:' #b00020',
   },
   fonts: {
     family: 'Poppins',
