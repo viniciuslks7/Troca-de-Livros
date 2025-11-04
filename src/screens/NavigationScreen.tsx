@@ -1,17 +1,17 @@
+import { StackNavigationProp } from '@react-navigation/stack';
 import React, { useState } from 'react';
 import { ScrollView } from 'react-native';
 import styled from 'styled-components/native';
-import { StackNavigationProp } from '@react-navigation/stack';
 import { RootStackParamList } from '../navigation/AppNavigator';
 import { theme } from '../styles/theme';
 
 // Componentes criados
-import AppStatusBar from '../components/StatusBar';
-import Header from '../components/Header';
-import SearchBar from '../components/SearchBar';
-import CategoryFilter from '../components/CategoryFilter';
 import BookListSection from '../components/BookListSection';
 import BottomNavigationBar from '../components/BottomNavigationBar';
+import CategoryFilter from '../components/CategoryFilter';
+import Header from '../components/Header';
+import SearchBar from '../components/SearchBar';
+import AppStatusBar from '../components/StatusBar';
 
 type NavigationScreenProps = {
   navigation: StackNavigationProp<RootStackParamList, 'Navigation'>;
@@ -118,9 +118,9 @@ const NavigationScreen: React.FC<NavigationScreenProps> = ({ navigation }) => {
 
       <BottomNavigationBar
         activeTab="home"
-        onHomePress={() => console.log('Home pressed')}
+        onHomePress={() => navigation.navigate('Navigation')}
         onFavoritesPress={() => console.log('Favorites pressed')}
-        onCartPress={() => console.log('Cart pressed')}
+        onCartPress={() => navigation.navigate('HistoricoCompras')}
         onNotificationsPress={() => console.log('Notifications pressed')}
         onProfilePress={() => navigation.navigate('Profile')}
       />

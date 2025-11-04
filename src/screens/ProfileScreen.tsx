@@ -1,14 +1,14 @@
-import React from 'react';
-import { ScrollView, TouchableOpacity, Image } from 'react-native';
-import styled from 'styled-components/native';
 import { StackNavigationProp } from '@react-navigation/stack';
+import React from 'react';
+import { Image } from 'react-native';
+import styled from 'styled-components/native';
 import { RootStackParamList } from '../navigation/AppNavigator';
 import { theme } from '../styles/theme';
 
 // Componentes reutilizáveis
-import AppStatusBar from '../components/StatusBar';
-import Header from '../components/Header';
 import BottomNavigationBar from '../components/BottomNavigationBar';
+import Header from '../components/Header';
+import AppStatusBar from '../components/StatusBar';
 
 type ProfileScreenProps = {
   navigation: StackNavigationProp<RootStackParamList, 'Profile'>;
@@ -192,7 +192,8 @@ const ProfileScreen: React.FC<ProfileScreenProps> = ({ navigation }) => {
 
   const handlePurchaseHistory = () => {
     console.log('Purchase history pressed');
-    // Navegar para tela de histórico de compras
+    // Navegar para tela de hist�rico de compras
+    navigation.navigate('HistoricoCompras');
   };
 
   return (
@@ -249,12 +250,12 @@ const ProfileScreen: React.FC<ProfileScreenProps> = ({ navigation }) => {
       </ContentContainer>
 
       <BottomNavigationBar
-        activeTab="profile"
+        activeTab="home"
         onHomePress={() => navigation.navigate('Navigation')}
         onFavoritesPress={() => console.log('Favorites pressed')}
-        onCartPress={() => console.log('Cart pressed')}
+        onCartPress={() => navigation.navigate('HistoricoCompras')}
         onNotificationsPress={() => console.log('Notifications pressed')}
-        onProfilePress={() => console.log('Profile pressed')}
+        onProfilePress={() => navigation.navigate('Profile')}
       />
     </Container>
   );
