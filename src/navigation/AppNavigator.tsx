@@ -2,8 +2,9 @@ import { createStackNavigator } from '@react-navigation/stack';
 import React from 'react';
 
 import CriarContaScreen from '../screens/CriarContaScreen';
+import DetalheLivrosScreen from '../screens/DetalheLivrosScreen';
 import EsqueceuSenhaScreen from '../screens/EsqueceuSenhaScreen';
-import HistoricooComprasScreen from '../screens/HistoricoComprasScreen';
+import HistoricoComprasScreen from '../screens/HistoricoComprasScreen';
 import InicialScreen from '../screens/InicialScreen';
 import LoginClienteScreen from '../screens/LoginClienteScreen';
 import NavigationScreen from '../screens/NavigationScreen';
@@ -21,6 +22,7 @@ export type RootStackParamList = {
   Navigation: undefined;
   Profile: undefined;
   HistoricoCompras: undefined;
+  DetalheLivros: { book: any };  // << RECEBE O LIVRO
 };
 
 const Stack = createStackNavigator<RootStackParamList>();
@@ -43,7 +45,8 @@ const AppNavigator: React.FC = () => {
       <Stack.Screen name="EsqueceuSenha" component={EsqueceuSenhaScreen} />
       <Stack.Screen name="Navigation" component={NavigationScreen} />
       <Stack.Screen name="Profile" component={ProfileScreen} />
-       <Stack.Screen name="HistoricoCompras" component={HistoricooComprasScreen} />
+       <Stack.Screen name="HistoricoCompras" component={HistoricoComprasScreen} />
+       <Stack.Screen name="DetalheLivros" component={DetalheLivrosScreen} />
 
     </Stack.Navigator>
   );
