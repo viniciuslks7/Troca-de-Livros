@@ -58,7 +58,7 @@ const NavigationScreen: React.FC<NavigationScreenProps> = ({ navigation }) => {
   const bibliaBook = [
     {
       id: '3',
-      title: 'BÍBLIA SAGRADA',
+      title: 'BIBLIA SAGRADA',
       price: 'R$ 45,00un',
       image: require('../../assets/Telas/7-navegacao/img-biblia.png'),
       showWeeklyBadge: true,
@@ -67,8 +67,8 @@ const NavigationScreen: React.FC<NavigationScreenProps> = ({ navigation }) => {
   ];
 
   const handleBookPress = (book: any) => {
-    console.log('Book pressed:', book.title);
-  };
+  navigation.navigate('DetalheLivros', { book });
+};
 
   const handleAddPress = (book: any) => {
     console.log('Add to cart:', book.title);
@@ -98,9 +98,9 @@ const NavigationScreen: React.FC<NavigationScreenProps> = ({ navigation }) => {
       <ScrollView showsVerticalScrollIndicator={false}>
         <ContentContainer>
           <BookListSection
-            title="Mais lindos"
+            title="Mais lidos"
             books={maisLindosBooks}
-            onViewAllPress={() => console.log('Ver todos - Mais lindos')}
+            onViewAllPress={() => console.log('Ver todos - Mais lidos')}
             onBookPress={handleBookPress}
             onAddPress={handleAddPress}
           />
