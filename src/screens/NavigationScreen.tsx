@@ -119,7 +119,7 @@ const NavigationScreen: React.FC<NavigationScreenProps> = ({ navigation }) => {
       <BottomNavigationBar
         activeTab="home"
         onHomePress={() => navigation.navigate('Navigation')}
-        onFavoritesPress={() => console.log('Favorites pressed')}
+        onFavoritesPress={() => navigation.navigate('Favoritos')}
         onCartPress={() => navigation.navigate('HistoricoCompras')}
         onNotificationsPress={() => console.log('Notifications pressed')}
         onProfilePress={() => navigation.navigate('Profile')}

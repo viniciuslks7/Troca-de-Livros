@@ -11,11 +11,13 @@ import NavigationScreen from '../screens/NavigationScreen';
 import ProfileScreen from '../screens/ProfileScreen';
 import PropagandaScreen from '../screens/PropagandaScreen';
 import SplashScreen from '../screens/SplashScreen';
+import FavoritosScreen from '../screens/FavoritosScreen';
 
 export type RootStackParamList = {
   Splash: undefined;
   Propaganda: undefined;
   Inicial: undefined;
+  Favoritos: undefined;
   LoginCliente: undefined;
   CriarConta: undefined;
   EsqueceuSenha: undefined;
@@ -40,6 +42,7 @@ const AppNavigator: React.FC = () => {
       <Stack.Screen name="Splash" component={SplashScreen} />
       <Stack.Screen name="Propaganda" component={PropagandaScreen} />
       <Stack.Screen name="Inicial" component={InicialScreen} />
+      <Stack.Screen name="Favoritos" component={FavoritosScreen} />
       <Stack.Screen name="LoginCliente" component={LoginClienteScreen} />
       <Stack.Screen name="CriarConta" component={CriarContaScreen} />
       <Stack.Screen name="EsqueceuSenha" component={EsqueceuSenhaScreen} />
