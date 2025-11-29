@@ -24,7 +24,7 @@ const HistoricooComprasScreen: React.FC<HistoricoComprasScreenProps> = ({ naviga
     return (
         <Container>
             <AppStatusBar />
-            <Header />
+            <Header navigation={navigation} />
 
 
             <HistoricoSearchBar
