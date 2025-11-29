@@ -94,7 +94,7 @@ const LogoContainer = styled.View`
   width: 221px;
   height: 142.28px;
   left: ${(screenWidth - 221) / 2}px;
-  top: ${(screenHeight - 142.28) / 2 - 126.86}px;
+  top: ${(screenHeight - 142.28) / 2 - 150.86}px; /* movido 30px para baixo */
   justify-content: center;
   align-items: center;
 `;
@@ -198,6 +198,9 @@ const InicialScreen: React.FC = () => {
   const handleLogin = () => {
     navigation.navigate('LoginCliente');
   };
+  const handleRegister = () => {
+    navigation.navigate('CriarConta');
+  };
 
   const getCurrentTime = () => {
     const now = new Date();
@@ -256,7 +259,13 @@ const InicialScreen: React.FC = () => {
           <WelcomeTitle>Bem-vindo!</WelcomeTitle>
           <SubtitleText>Tudo o que precisa está aqui. Aproveite!</SubtitleText>
           <LoginButton onPress={handleLogin}>
-            <LoginButtonText>FAZER LOGIN</LoginButtonText>
+            <LoginButtonText>ENTRAR</LoginButtonText>
+          </LoginButton>
+          <LoginButton
+            style={{ backgroundColor: '#E67C22', marginTop: 16 }}
+            onPress={handleRegister}
+          >
+            <LoginButtonText style={{ color: '#fff' }}>CADASTRAR</LoginButtonText>
           </LoginButton>
         </ContentContainer>
       </Animated.View>

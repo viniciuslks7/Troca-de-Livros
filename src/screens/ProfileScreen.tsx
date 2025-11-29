@@ -1,6 +1,8 @@
 import { StackNavigationProp } from '@react-navigation/stack';
-import React from 'react';
+import React, { useState } from 'react';
 import { Image } from 'react-native';
+import * as ImagePicker from 'expo-image-picker';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import styled from 'styled-components/native';
 import { RootStackParamList } from '../navigation/AppNavigator';
 import { theme } from '../styles/theme';
@@ -180,9 +182,36 @@ const HistoryButtonText = styled.Text`
 `;
 
 const ProfileScreen: React.FC<ProfileScreenProps> = ({ navigation }) => {
-  const handleEditProfile = () => {
-    console.log('Edit profile pressed');
-    // Navegar para tela de edição de perfil
+
+  const [profileImage, setProfileImage] = useState<string | null>(null);
+
+  React.useEffect(() => {
+    // Carrega imagem do perfil do AsyncStorage ao montar
+    const loadProfileImage = async () => {
+      const uri = await AsyncStorage.getItem('profileImage');
+      if (uri) setProfileImage(uri);
+    };
+    loadProfileImage();
+  }, []);
+
+  const handleEditProfile = async () => {
+    // Solicita permissão para acessar a galeria
+    const permissionResult = await ImagePicker.requestMediaLibraryPermissionsAsync();
+    if (!permissionResult.granted) {
+      alert('Permissão para acessar a galeria é necessária!');
+      return;
+    }
+    // Abre o seletor de imagens
+    const pickerResult = await ImagePicker.launchImageLibraryAsync({
+      mediaTypes: ImagePicker.MediaTypeOptions.Images,
+      allowsEditing: true,
+      aspect: [1, 1],
+      quality: 1,
+    });
+    if (!pickerResult.canceled && pickerResult.assets && pickerResult.assets.length > 0) {
+      setProfileImage(pickerResult.assets[0].uri);
+      await AsyncStorage.setItem('profileImage', pickerResult.assets[0].uri);
+    }
   };
 
   const handleEditPersonalData = () => {
@@ -192,7 +221,7 @@ const ProfileScreen: React.FC<ProfileScreenProps> = ({ navigation }) => {
 
   const handlePurchaseHistory = () => {
     console.log('Purchase history pressed');
-    // Navegar para tela de hist�rico de compras
+    // Navegar para tela de hist�rico de compras
     navigation.navigate('HistoricoCompras');
   };
 
@@ -210,14 +239,21 @@ const ProfileScreen: React.FC<ProfileScreenProps> = ({ navigation }) => {
         <PageTitle>Meu perfil</PageTitle>
 
         <ProfileImageContainer>
-          <ProfileImagePlaceholder>
-            <Image 
-              source={require('../../assets/Telas/8-perfil/icon-img.png')}
-              style={{ width: 49.5, height: 49.5 }}
-              resizeMode="contain"
+          {profileImage ? (
+            <Image
+              source={{ uri: profileImage }}
+              style={{ width: 140, height: 140, borderRadius: 70 }}
+              resizeMode="cover"
             />
-          </ProfileImagePlaceholder>
-          
+          ) : (
+            <ProfileImagePlaceholder>
+              <Image 
+                source={require('../../assets/Telas/8-perfil/icon-img.png')}
+                style={{ width: 49.5, height: 49.5 }}
+                resizeMode="contain"
+              />
+            </ProfileImagePlaceholder>
+          )}
           <EditIconContainer onPress={handleEditProfile}>
             <Image 
               source={require('../../assets/Telas/8-perfil/icon-edit.png')}

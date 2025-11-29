@@ -176,17 +176,19 @@ const GoogleButtonText = styled.Text`
 
 const FooterContainer = styled.View`
   position: absolute;
-  left: 94px;
+  left: 0;
+  right: 0;
   top: 746px;
   flex-direction: row;
   align-items: center;
+  justify-content: center;
 `;
 
 const FooterText = styled.Text`
   font-family: 'Poppins';
   font-weight: 400;
-  font-size: 12px;
-  line-height: 16px;
+  font-size: 16px;
+  line-height: 20px;
   color: #707B81;
   text-transform: capitalize;
 `;
@@ -194,8 +196,8 @@ const FooterText = styled.Text`
 const LoginText = styled.Text`
   font-family: 'Poppins';
   font-weight: 500;
-  font-size: 12px;
-  line-height: 16px;
+  font-size: 16px;
+  line-height: 20px;
   color: #1A2530;
   text-transform: capitalize;
   margin-left: 4px;
@@ -207,6 +209,10 @@ const CriarContaScreen: React.FC = () => {
   const [email, setEmail] = useState('');
   const [senha, setSenha] = useState('');
   const [showPassword, setShowPassword] = useState(false);
+
+  const handleEnterApp = () => {
+    navigation.navigate('Navigation');
+  };
 
   return (
     <Container>
@@ -236,7 +242,7 @@ const CriarContaScreen: React.FC = () => {
           } />
         </EyeIcon>
       </PasswordContainer>
-      <Button style={{ top: 572 }}>
+      <Button style={{ top: 572 }} onPress={handleEnterApp}>
         <ButtonText>Entrar</ButtonText>
       </Button>
       <GoogleButton style={{ top: 656 }}>
@@ -244,8 +250,8 @@ const CriarContaScreen: React.FC = () => {
         <GoogleButtonText>Entrar com o Google</GoogleButtonText>
       </GoogleButton>
       <FooterContainer>
-        <FooterText>Você possui uma conta?</FooterText>
-        <LoginText onPress={() => navigation.navigate('LoginCliente')}>Login</LoginText>
+        <FooterText style={{ textAlign: 'center' }}>Você possui uma conta?</FooterText>
+        <LoginText onPress={() => navigation.navigate('LoginCliente')} style={{ textAlign: 'center', marginLeft: 4 }}>Login</LoginText>
       </FooterContainer>
     </Container>
   );

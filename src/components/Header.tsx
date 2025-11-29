@@ -1,4 +1,5 @@
 import React, { useRef, useState } from 'react';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import { Animated, Dimensions, Modal, Pressable } from 'react-native';
 import styled from 'styled-components/native';
 import { theme } from '../styles/theme';
@@ -150,9 +151,9 @@ const SidebarMenuItem = styled.TouchableOpacity`
 `;
 
 const SidebarMenuIcon = styled.Image`
-  width: 28px;
-  height: 28px;
-  border-radius: 14px;
+  width: 32px;
+  height: 32px;
+  border-radius: 16px;
   margin-right: ${theme.spacing.md}px;
 `;
 
@@ -169,8 +170,18 @@ interface HeaderProps {
 
 const Header: React.FC<HeaderProps> = ({ onMenuPress, onShoppingBagPress, navigation }) => {
   const [isOpen, setIsOpen] = useState(false);
+  const [profileImage, setProfileImage] = useState<string | null>(null);
   const slide = useRef(new Animated.Value(-SIDEBAR_WIDTH)).current;
   const backdropOpacity = useRef(new Animated.Value(0)).current;
+
+  React.useEffect(() => {
+    // Carrega imagem do perfil do AsyncStorage ao abrir o menu
+    const loadProfileImage = async () => {
+      const uri = await AsyncStorage.getItem('profileImage');
+      setProfileImage(uri);
+    };
+    if (isOpen) loadProfileImage();
+  }, [isOpen]);
 
   const openSidebar = () => {
     setIsOpen(true);
@@ -219,7 +230,15 @@ const Header: React.FC<HeaderProps> = ({ onMenuPress, onShoppingBagPress, naviga
 
           <SidebarContainer style={{ transform: [{ translateX: slide }], zIndex: 1000, elevation: 20 }}>
             <AvatarCircle>
-              <AvatarPlaceholderText>?</AvatarPlaceholderText>
+              {profileImage ? (
+                <Animated.Image
+                  source={{ uri: profileImage }}
+                  style={{ width: 84, height: 84, borderRadius: 42 }}
+                  resizeMode="cover"
+                />
+              ) : (
+                <AvatarPlaceholderText>?</AvatarPlaceholderText>
+              )}
             </AvatarCircle>
 
             <Greeting>Olá</Greeting>
@@ -230,18 +249,27 @@ const Header: React.FC<HeaderProps> = ({ onMenuPress, onShoppingBagPress, naviga
             </PromoButton>
 
             <SidebarMenuItem onPress={() => { /* navegar */ }}>
-              <SidebarMenuIcon source={require('../../assets/Telas/7-navegacao/icon-local.png')} />
+              <SidebarMenuIcon source={require('../../assets/Telas/8.1- Menu Lateral/Endereço de ENtrega.png')} />
               <SidebarMenuText>Endereço de Entrega</SidebarMenuText>
             </SidebarMenuItem>
 
             <SidebarMenuItem onPress={() => { /* navegar */ }}>
-              <SidebarMenuIcon source={require('../../assets/Telas/7-navegacao/icon-sacola-venda.png')} />
+              <SidebarMenuIcon source={require('../../assets/Telas/8.1- Menu Lateral/Forma de Pagamento.png')} />
               <SidebarMenuText>Forma de Pagamento</SidebarMenuText>
             </SidebarMenuItem>
 
             <SidebarMenuItem onPress={() => { /* navegar */ }}>
-              <SidebarMenuIcon source={require('../../assets/Telas/8-perfil/icon-edit.png')} />
+              <SidebarMenuIcon source={require('../../assets/Telas/8.1- Menu Lateral/Configurações.png')} />
               <SidebarMenuText>Configurações</SidebarMenuText>
+            </SidebarMenuItem>
+
+            <SidebarMenuItem onPress={() => {
+              // ação de logout: pode navegar para tela inicial ou login
+              if (navigation) navigation.navigate('Inicial');
+              closeSidebar();
+            }}>
+              <SidebarMenuIcon source={require('../../assets/Telas/8.1- Menu Lateral/Sair.png')} />
+              <SidebarMenuText>Sair</SidebarMenuText>
             </SidebarMenuItem>
           </SidebarContainer>
         </Animated.View>
