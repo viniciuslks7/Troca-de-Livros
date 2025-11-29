@@ -202,6 +202,7 @@ const ProfileScreen: React.FC<ProfileScreenProps> = ({ navigation }) => {
       
       <ContentContainer>
         <Header 
+          navigation={navigation}
           onMenuPress={() => console.log('Menu pressed')}
           onShoppingBagPress={() => console.log('Shopping bag pressed')}
         />

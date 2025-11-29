@@ -79,6 +79,7 @@ const NavigationScreen: React.FC<NavigationScreenProps> = ({ navigation }) => {
       <AppStatusBar />
       
       <Header 
+        navigation={navigation}
         onMenuPress={() => console.log('Menu pressed')}
         onShoppingBagPress={() => console.log('Shopping bag pressed')}
       />

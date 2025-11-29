@@ -4,6 +4,7 @@ import React from 'react';
 import CriarContaScreen from '../screens/CriarContaScreen';
 import DetalheLivrosScreen from '../screens/DetalheLivrosScreen';
 import EsqueceuSenhaScreen from '../screens/EsqueceuSenhaScreen';
+import FavoritosScreen from '../screens/FavoritosScreen';
 import HistoricoComprasScreen from '../screens/HistoricoComprasScreen';
 import InicialScreen from '../screens/InicialScreen';
 import LoginClienteScreen from '../screens/LoginClienteScreen';
@@ -11,7 +12,7 @@ import NavigationScreen from '../screens/NavigationScreen';
 import ProfileScreen from '../screens/ProfileScreen';
 import PropagandaScreen from '../screens/PropagandaScreen';
 import SplashScreen from '../screens/SplashScreen';
-import FavoritosScreen from '../screens/FavoritosScreen';
+import VendaScreen from '../screens/VendaScreen';
 
 export type RootStackParamList = {
   Splash: undefined;
@@ -24,6 +25,7 @@ export type RootStackParamList = {
   Navigation: undefined;
   Profile: undefined;
   HistoricoCompras: undefined;
+  Venda: undefined;
   DetalheLivros: { book: any };  // << RECEBE O LIVRO
 };
 
@@ -48,7 +50,8 @@ const AppNavigator: React.FC = () => {
       <Stack.Screen name="EsqueceuSenha" component={EsqueceuSenhaScreen} />
       <Stack.Screen name="Navigation" component={NavigationScreen} />
       <Stack.Screen name="Profile" component={ProfileScreen} />
-       <Stack.Screen name="HistoricoCompras" component={HistoricoComprasScreen} />
+      <Stack.Screen name="Venda" component={VendaScreen} />
+      <Stack.Screen name="HistoricoCompras" component={HistoricoComprasScreen} />
        <Stack.Screen name="DetalheLivros" component={DetalheLivrosScreen} />
 
     </Stack.Navigator>

@@ -1,5 +1,5 @@
-import React, { useState, useRef } from 'react';
-import { Animated, Dimensions, Pressable, Modal } from 'react-native';
+import React, { useRef, useState } from 'react';
+import { Animated, Dimensions, Modal, Pressable } from 'react-native';
 import styled from 'styled-components/native';
 import { theme } from '../styles/theme';
 
@@ -164,9 +164,10 @@ const SidebarMenuText = styled.Text`
 interface HeaderProps {
   onMenuPress?: () => void;
   onShoppingBagPress?: () => void;
+  navigation?: any;
 }
 
-const Header: React.FC<HeaderProps> = ({ onMenuPress, onShoppingBagPress }) => {
+const Header: React.FC<HeaderProps> = ({ onMenuPress, onShoppingBagPress, navigation }) => {
   const [isOpen, setIsOpen] = useState(false);
   const slide = useRef(new Animated.Value(-SIDEBAR_WIDTH)).current;
   const backdropOpacity = useRef(new Animated.Value(0)).current;
@@ -201,7 +202,10 @@ const Header: React.FC<HeaderProps> = ({ onMenuPress, onShoppingBagPress }) => {
           </LocationContainer>
         </LeftSection>
         
-        <ShoppingBagContainer onPress={onShoppingBagPress}>
+        <ShoppingBagContainer onPress={() => {
+          onShoppingBagPress?.();
+          navigation?.navigate('Venda');
+        }}>
           <ShoppingBagIcon source={require('../../assets/Telas/7-navegacao/icon-sacola.png')} />
           <NotificationBadge />
         </ShoppingBagContainer>

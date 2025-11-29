@@ -1,11 +1,11 @@
+import { useNavigation } from '@react-navigation/native';
 import React from 'react';
 import { ScrollView } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
 import styled from 'styled-components/native';
-import Header from '../components/Header';
 import BookCard from '../components/BookCard';
-import { theme } from '../styles/theme';
 import BottomNavigationBar from '../components/BottomNavigationBar';
+import Header from '../components/Header';
+import { theme } from '../styles/theme';
 
 const Container = styled.View`
   flex: 1;
@@ -61,7 +61,7 @@ const FavoritosScreen: React.FC = () => {
 
   return (
     <Container>
-      <Header />
+      <Header navigation={navigation} />
 
       <ScrollView contentContainerStyle={{ paddingBottom: 120 }}>
         <Content>
